@@ -40,9 +40,12 @@ const removeContact = ((id) => {
   return (
     <div className="App">
       <h1>IronContacts</h1>
-      <button onClick={randomContact}>Add Random Contact</button>
-      <button onClick={sortByName}>Sort By Name</button>
-      <button onClick={sortByPopularity}>Sort By Popularity</button>
+      <nav>
+      <button className='Button' onClick={randomContact}>Add Random Contact</button>
+      <button className='Button' onClick={sortByName}>Sort By Name</button>
+      <button className='Button' onClick={sortByPopularity}>Sort By Popularity</button>
+      </nav>
+<div className='Table'>
 <table>
   <thead>
     <tr>
@@ -62,11 +65,12 @@ const removeContact = ((id) => {
   <td>{celeb.popularity}</td>
   <td>{(celeb.wonOscar === true) && <td>🏆</td>}</td>
   <td>{(celeb.wonEmmy === true) && <td>🏆</td>}</td>
-  <td><button onClick={() => removeContact(celeb.id)}>Delete</button></td>
+  <td><button className='Button' onClick={() => removeContact(celeb.id)}>Delete</button></td>
 </tr>
   )}
   </tbody>
 </table>
+</div>
     </div>
   );
 }
