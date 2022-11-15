@@ -6,18 +6,38 @@ const reducedContacts = contactsJSON.slice(0, 5)
 
 function App() {
   const [contacts, setContacts] = useState(reducedContacts)
+
   const randomContact = () => {
   let randomIndex = Math.floor(Math.random() * ((contactsJSON.length - 1) - 5) + 5)
   let randomContact = contactsJSON[randomIndex]
   setContacts([randomContact,...contacts])
-  console.log(contactsJSON)
   contactsJSON.splice(randomIndex, 1)
-  console.log(contactsJSON)
   }
+
+const sortByName = () => {
+  let copyContacts = contacts.map((contact) => {
+    return contact
+  })
+
+  let sortedContacts = copyContacts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name))
+setContacts(sortedContacts)
+}
+
+const sortByPopularity = () => {
+  let copyContacts = contacts.map((contact) => {
+    return contact
+  })
+
+  let sortedContacts = copyContacts.sort((a, b) => a.popularity - b.popularity)
+setContacts(sortedContacts) 
+}
+
   return (
-    
     <div className="App">
       <h1>IronContacts</h1>
+      <button onClick={randomContact}>Add Random Contact</button>
+      <button onClick={sortByName}>Sort By Name</button>
+      <button onClick={sortByPopularity}>Sort By Popularity</button>
 <table>
   <thead>
     <tr>
@@ -31,7 +51,7 @@ function App() {
   <tbody>
   {contacts.map((celeb) => 
   <tr key={celeb.id}>
-  <td><img style={{height: "200px"}} src={celeb.pictureUrl}/></td>
+  <td><img style={{height: "100px"}} src={celeb.pictureUrl}/></td>
   <td>{celeb.name}</td>
   <td>{celeb.popularity}</td>
   {(celeb.wonOscar === true) && <td>🏆</td>}
@@ -40,7 +60,6 @@ function App() {
   )}
   </tbody>
 </table>
-<button onClick={randomContact}>Add Random Contact</button>
     </div>
   );
 }
