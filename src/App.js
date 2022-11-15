@@ -32,6 +32,11 @@ const sortByPopularity = () => {
 setContacts(sortedContacts) 
 }
 
+const removeContact = ((id) => {
+  let filteredContacts = contacts.filter((contact) => contact.id !== id)
+   setContacts(filteredContacts);
+})
+
   return (
     <div className="App">
       <h1>IronContacts</h1>
@@ -46,6 +51,7 @@ setContacts(sortedContacts)
       <th>Popularity</th>
       <th>Won Oscar</th>
       <th>Won Emmy</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -54,8 +60,9 @@ setContacts(sortedContacts)
   <td><img style={{height: "100px"}} src={celeb.pictureUrl}/></td>
   <td>{celeb.name}</td>
   <td>{celeb.popularity}</td>
-  {(celeb.wonOscar === true) && <td>🏆</td>}
-  {(celeb.wonEmmy === true) && <td>🏆</td>}
+  <td>{(celeb.wonOscar === true) && <td>🏆</td>}</td>
+  <td>{(celeb.wonEmmy === true) && <td>🏆</td>}</td>
+  <td><button onClick={() => removeContact(celeb.id)}>Delete</button></td>
 </tr>
   )}
   </tbody>
