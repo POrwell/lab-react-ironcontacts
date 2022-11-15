@@ -1,11 +1,19 @@
 import './App.css';
-import contacts from "./contacts.json";
+import contactsJSON from "./contacts.json";
 import React, { useState } from "react";
-const reducedContacts = contacts.slice(0, 5)
+const reducedContacts = contactsJSON.slice(0, 5)
+
 
 function App() {
-  console.log(reducedContacts)
- const [contacts, setContacts] = useState(reducedContacts)
+  const [contacts, setContacts] = useState(reducedContacts)
+  const randomContact = () => {
+  let randomIndex = Math.floor(Math.random() * ((contactsJSON.length - 1) - 5) + 5)
+  let randomContact = contactsJSON[randomIndex]
+  setContacts([randomContact,...contacts])
+  console.log(contactsJSON)
+  contactsJSON.splice(randomIndex, 1)
+  console.log(contactsJSON)
+  }
   return (
     
     <div className="App">
@@ -23,7 +31,7 @@ function App() {
   <tbody>
   {contacts.map((celeb) => 
   <tr key={celeb.id}>
-  <td><img src={celeb.pictureUrl}/></td>
+  <td><img style={{height: "200px"}} src={celeb.pictureUrl}/></td>
   <td>{celeb.name}</td>
   <td>{celeb.popularity}</td>
   {(celeb.wonOscar === true) && <td>🏆</td>}
@@ -32,6 +40,7 @@ function App() {
   )}
   </tbody>
 </table>
+<button onClick={randomContact}>Add Random Contact</button>
     </div>
   );
 }
